@@ -31,9 +31,10 @@ Currently in **early development**
 
 This project just started.
 Planned next steps:
-- [ ] Creating dynamic boundries to levels
-- [ ] Basic attack ability
-- [ ] First enemy prototyp
+- [ ] 💻 Creating dynamic boundries to levels
+- [ ] 💻 Basic attack ability
+- [ ] 💻 First enemy prototyp
+- [ ] 🎨 Creating tileset for a level
 
 ---
 
