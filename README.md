@@ -42,7 +42,6 @@ If you're curious about the project or want to collaborate, reach out:
 🐸 Or open an issue here on GitHub!
 
 ## 📄 License
-## 📄 License
 
 This project is under a custom non-commercial license.  
-See the (./LICENSE) file for details.
+See the [LICENSE](./LICENSE) file for details.
