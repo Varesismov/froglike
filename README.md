@@ -35,11 +35,15 @@ Planned next steps:
 - [ ] Basic attack ability
 - [ ] First enemy prototyp
 
+---
+
 ## 📬 Contact
 
 If you're curious about the project or want to collaborate, reach out:  
 📧 kstajniak42@gmail.com  
 🐸 Or open an issue here on GitHub!
+
+---
 
 ## 📄 License
 
