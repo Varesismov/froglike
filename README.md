@@ -36,6 +36,7 @@ Planned next steps:
 - [ ] 💻 First enemy prototyp
 - [ ] 🎨 Creating tileset for a level
 
+![First Preview](img/progress2.png)
 ---
 
 ## 📬 Contact
