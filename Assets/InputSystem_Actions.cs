@@ -109,6 +109,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
+                {
+                    ""name"": ""AttackDirection"",
                     ""type"": ""Value"",
                     ""id"": ""5d4a95d7-6f25-42d7-9e48-6dca2f4bef9f"",
                     ""expectedControlType"": ""Vector2"",
