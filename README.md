@@ -38,7 +38,7 @@ Planned next steps:
 
 ![First Preview](img/progress2.png)
 
-<img src="img/progress2.png" alt="First Preview" width="200" height="100"/>
+<img src="img/progress2.png" alt="First Preview" width="600" height="200"/>
 
 ---
 
