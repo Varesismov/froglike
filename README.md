@@ -36,7 +36,7 @@ Planned next steps:
 - [ ] 💻 First enemy prototyp
 - [ ] 🎨 Creating tileset for a level
 
-## 🗣 Preview of the first generated level
+## 🎮 Game Preview
 ![First Preview](img/progress2.png)
 
 ---
