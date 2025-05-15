@@ -12,7 +12,8 @@ public class BoundriesScript : MonoBehaviour
         float width = 16f;
         float height = 9f;
 
-        Vector3 camPos = cam.transform.position;
+
+        //Vector3 camPos = cam.transform.position;
 
         //// Boundries
         //CreateBoundary(new Vector2(camPos.x, camPos.y + height / 2 + thickness / 2),
