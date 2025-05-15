@@ -9,8 +9,12 @@ public class Playerscript : MonoBehaviour
 
     Vector2 moveDirection = Vector2.zero;
     private InputAction move;
+
     private InputAction attack;
-    private InputAction interact;
+
+    private InputAction attackDirection;
+    Vector2 attackDir = Vector2.zero;
+
 
 
     private void Awake()
@@ -28,19 +32,28 @@ public class Playerscript : MonoBehaviour
         attack.Enable();
         attack.performed += Attack;
 
-        interact = playerControls.Player.Interact;
-        interact.Enable();
-        interact.performed += Interact;
+        attackDirection = playerControls.Player.AttackDirection;
+        attackDirection.Enable();
+        attackDirection.performed += AttackDirection;
+
     }
     private void OnDisable()
     {
         move.Disable();
         attack.Disable();
-        interact.Disable();
+        attackDirection.Disable();
     }
     void Update()
     {
         moveDirection = move.ReadValue<Vector2>();
+
+        attackDir = attackDirection.ReadValue<Vector2>();
+
+        if (attackDir != Vector2.zero)
+        {
+            Shoot(attackDir); 
+        }
+
 
     }
 
@@ -53,8 +66,14 @@ public class Playerscript : MonoBehaviour
     {
         Debug.Log("You've succesfully performed an attack");
     }
-    private void Interact(InputAction.CallbackContext context)
+
+    private void AttackDirection(InputAction.CallbackContext context)
     {
-        Debug.Log("You've picked up and item");
+        Debug.Log("You've succefully fired");
     }
+    void Shoot(Vector2 direction)
+    {
+        Debug.Log("Strzelam w kierunku: " + direction);
+    }
+
 }
