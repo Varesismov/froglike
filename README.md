@@ -37,6 +37,9 @@ Planned next steps:
 - [ ] 🎨 Creating tileset for a level
 
 ![First Preview](img/progress2.png)
+
+<img src="img/progress2.png" alt="First Preview" width="200" height="100"/>
+
 ---
 
 ## 📬 Contact
