@@ -3,34 +3,48 @@ using UnityEngine.InputSystem;
 
 public class Playerscript : MonoBehaviour
 {
+    // ---  Components  ---
     public Rigidbody2D myRb;
-    public float moveSpeed = 5f;
     public InputSystem_Actions playerControls;
-
     public GameObject projectilePrefab;
-    public float bulletSpeed = 10f;       
-    public float fireRate = 0.5f;
     public Sprite yourSprite;
     public Transform firePoint;
+
+    // ---  Player Stats  ---
     public float damage = 10f;
+    public float bulletSpeed = 10f;
+    public float fireRate = 0.3f;
+    public float moveSpeed = 5f;
+    public float currentHealth = 100f;
+    public float maxHealth = 100f;
+    public float armor = 10f;
+    public float currentXP = 0f;
+    public float playerLevel = 0;
 
-
-
-
-
-
+    // ---  Player interaction  ---
     Vector2 moveDirection = Vector2.zero;
     private InputAction move;
-
     private InputAction attack;
-
     private InputAction attackDirection;
     Vector2 attackDir = Vector2.zero;
-
     private float lastFireTime = 0f;
 
 
+    // ---  XP Logic  ---
+    public void GainXP(float xpGained)
+    {
+        currentXP += xpGained;
+        Debug.Log($"+{xpGained} XP gained! Current XP: {currentXP}");
 
+        float xpForNextLevel = 100f + playerLevel * 50f;
+
+        if (currentXP >= xpForNextLevel)
+        {
+            currentXP -= xpForNextLevel;
+            playerLevel++;
+            Debug.Log($"Level up: {playerLevel}");
+        }
+    }
     private void Awake()
     {
         playerControls = new InputSystem_Actions();
@@ -49,11 +63,11 @@ public class Playerscript : MonoBehaviour
 
         attack = playerControls.Player.Attack;
         attack.Enable();
-        attack.performed += Attack;
+        //attack.performed += Attack;
 
         attackDirection = playerControls.Player.AttackDirection;
         attackDirection.Enable();
-        attackDirection.performed += AttackDirection;
+        //attackDirection.performed += AttackDirection;
 
     }
     private void OnDisable()
@@ -83,18 +97,14 @@ public class Playerscript : MonoBehaviour
         myRb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
-    private void Attack(InputAction.CallbackContext context)
-    {
-        //Debug.Log("You've succesfully performed an attack");
-    }
-
-    private void AttackDirection(InputAction.CallbackContext context)
-    {
-        //Debug.Log("You've succefully fired");
-    }
-    //void Shoot(Vector2 direction)
+    //private void Attack(InputAction.CallbackContext context)
     //{
-    //    Debug.Log("Shooting in a direction of: " + direction);
+    //    Debug.Log("You've succesfully performed an attack");
+    //}
+
+    //private void AttackDirection(InputAction.CallbackContext context)
+    //{
+    //    Debug.Log("You've succefully fired");
     //}
     void Shoot(Vector2 direction)
     {
