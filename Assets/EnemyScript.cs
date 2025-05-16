@@ -10,6 +10,8 @@ public class EnemyScript : MonoBehaviour
     public string mobName = "Orc Warrior";
 
     public TextMeshProUGUI nameText;
+    public GameObject xpPopupPrefab;
+
 
     public void Start()
     {
@@ -39,6 +41,17 @@ public class EnemyScript : MonoBehaviour
         {
             player.GainXP(xpcarried);
         }
+
+        if (xpPopupPrefab != null)
+        {
+            GameObject popup = Instantiate(xpPopupPrefab, transform.position, Quaternion.identity);
+            XPTextPopup popupScript = popup.GetComponentInChildren<XPTextPopup>();
+            if (popupScript != null)
+            {
+                popupScript.SetText("+" + xpcarried + " XP");
+            }
+        }
+
 
         Destroy(gameObject);
     }
