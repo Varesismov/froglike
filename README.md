@@ -31,10 +31,10 @@ Currently in **early development**
 
 This project just started.
 Planned next steps:
-- [ ] 💻 Creating dynamic boundries to levels
-- [ ] 💻 Basic attack ability
-- [ ] 💻 First enemy prototyp
-- [ ] 🎨 Creating tileset for a level
+- [ ] 💻 Enemies Health Bars
+- [ ] 💻 XP gain on screen
+- [ ] 💻 Damage marker on enemy
+- [ ] 🎨 Projectiles for player
 
 ## 🎮 Game Preview
 ![First Preview](img/progress2.png)
