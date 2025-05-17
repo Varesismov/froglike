@@ -5,7 +5,7 @@ public class EnemyScript : MonoBehaviour
 {
     public float current_health = 100f;
     public float damage = 0f;
-    public float armor = 0f;
+    public float armor = 2f;
     public float xpcarried = 100f;
     public string mobName = "Orc Warrior";
 
@@ -45,6 +45,7 @@ public class EnemyScript : MonoBehaviour
         if (xpPopupPrefab != null)
         {
             GameObject popup = Instantiate(xpPopupPrefab, transform.position, Quaternion.identity);
+
             XPTextPopup popupScript = popup.GetComponentInChildren<XPTextPopup>();
             if (popupScript != null)
             {

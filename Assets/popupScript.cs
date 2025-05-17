@@ -25,10 +25,10 @@ public class XPTextPopup : MonoBehaviour
 
     private void Update()
     {
-        // unoszenie w górê
+        // Text Drag
         transform.position += Vector3.up * floatSpeed * Time.deltaTime;
 
-        // stopniowe znikanie
+        // Text Fading
         timer += Time.deltaTime;
         if (canvasGroup != null)
         {
@@ -37,7 +37,8 @@ public class XPTextPopup : MonoBehaviour
 
         if (timer >= fadeDuration)
         {
-            Destroy(gameObject);
+            Destroy(transform.root.gameObject);
+
         }
     }
 }
