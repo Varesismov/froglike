@@ -6,7 +6,8 @@ public class EnemyScript : MonoBehaviour
     public float current_health = 100f;
     public float damage = 0f;
     public float armor = 2f;
-    public float xpcarried = 100f;
+    public float xpcarriedMin = 50f;
+    public float xpcarriedMax = 100f;
     public string mobName = "Orc Warrior";
 
     public TextMeshProUGUI nameText;
@@ -21,6 +22,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    // Enemy taking damage
     public void TakeDamage(float dmg)
     {
         current_health = current_health - dmg / armor;
@@ -36,10 +38,10 @@ public class EnemyScript : MonoBehaviour
     private void Die()
     {
         Playerscript player = FindFirstObjectByType<Playerscript>();
-
+        float xpToGive = Random.Range(xpcarriedMin, xpcarriedMax);
         if (player != null)
         {
-            player.GainXP(xpcarried);
+            player.GainXP(xpToGive);
         }
 
         if (xpPopupPrefab != null)
@@ -49,7 +51,7 @@ public class EnemyScript : MonoBehaviour
             XPTextPopup popupScript = popup.GetComponentInChildren<XPTextPopup>();
             if (popupScript != null)
             {
-                popupScript.SetText("+" + xpcarried + " XP");
+                popupScript.SetText("+" + xpToGive.ToString("F2") + " XP");
             }
         }
 
