@@ -6,5 +6,17 @@ public class PlayerProgressData
     public int totalEnemiesKilled = 0;
     public float totalXpCollected = 0f;
     public int totalRunsCompleted = 0;
-    public List<int> unlockedItems = new List<int>();
+    public List<int> unlockedItemsIds = new List<int>();
+    public void UnlockItem(int id)
+    {
+        if (!unlockedItemsIds.Contains(id))
+        {
+            unlockedItemsIds.Add(id);
+        }
+    }
+
+    public bool IsItemUnlocked(int id)
+    {
+        return unlockedItemsIds.Contains(id);
+    }
 }

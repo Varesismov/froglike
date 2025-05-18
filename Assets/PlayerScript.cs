@@ -22,6 +22,7 @@ public class Playerscript : MonoBehaviour
     public float playerLevel = 0;
     public int currentRunEnemiesKilled = 0;
     public float currentRunXp = 0f;
+    PlayerProgressData playerProgressData;
 
 
     // ---  Player interaction  ---
@@ -139,18 +140,33 @@ public class Playerscript : MonoBehaviour
     {
         ProgressionManager.Instance.data.totalEnemiesKilled += currentRunEnemiesKilled;
         ProgressionManager.Instance.data.totalXpCollected += currentRunXp;
-        //ProgressionManager.Instance.data.totalRunsCompleted += 1;
 
         // np. odblokowywanie czegoœ
         if (ProgressionManager.Instance.data.totalEnemiesKilled >= 5)
         {
-            ProgressionManager.Instance.data.unlockedItems.Add(1);
+            ProgressionManager.Instance.data.unlockedItemsIds.Add(1);
         }
 
         ProgressionManager.Instance.SaveProgress();
         currentRunEnemiesKilled = 0;
         currentRunXp = 0f;
     }
+    // --- Item Unlocking ---
+    public void UnlockItem(int id)
+    {
+        
+        if (!playerProgressData.unlockedItemsIds.Contains(id))
+        {
+            playerProgressData.unlockedItemsIds.Add(id);
+        }
+    }
+
+    // --- Check if item is unlocked yet ---
+    public bool IsItemUnlocked(int id)
+    {
+        return playerProgressData.unlockedItemsIds.Contains(id);
+    }
+
 
 
     //private void AttackDirection(InputAction.CallbackContext context)
