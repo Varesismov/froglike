@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.AI;
 
 public class RandomTilemapGenerator : MonoBehaviour
 {

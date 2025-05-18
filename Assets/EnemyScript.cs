@@ -13,6 +13,9 @@ public class EnemyScript : MonoBehaviour
     public TextMeshProUGUI nameText;
     public GameObject xpPopupPrefab;
 
+    private Transform playerTransform;
+    private EnemyMovement2D movement;
+
 
     public void Start()
     {
@@ -20,9 +23,32 @@ public class EnemyScript : MonoBehaviour
         {
             nameText.text = mobName;
         }
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            playerTransform = playerObj.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Player object not found! Make sure it has tag 'Player'.");
+        }
+
+        movement = GetComponent<EnemyMovement2D>();
+        if (movement == null)
+        {
+            Debug.LogError("EnemyMovement2D component missing!");
+        }
+    }
+    void Update()
+    {
+        if (playerTransform != null && movement != null)
+        {
+            movement.SetTargetPosition(playerTransform.position);
+        }
+
     }
 
-    // Enemy taking damage
+    // --- Enemy Taking Damage ---
     public void TakeDamage(float dmg)
     {
         current_health = current_health - dmg / armor;
@@ -35,6 +61,8 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+
+    // --- Enemy Death ---
     private void Die()
     {
         Playerscript player = FindFirstObjectByType<Playerscript>();
