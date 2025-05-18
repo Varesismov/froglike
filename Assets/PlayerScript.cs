@@ -132,6 +132,9 @@ public class Playerscript : MonoBehaviour
 
         //Destroy(gameObject);
     }
+    // *******************************************************************
+    // *                         Progression Logic                       *
+    // ******************************************************************* 
     void OnPlayerDeath()
     {
         ProgressionManager.Instance.data.totalEnemiesKilled += currentRunEnemiesKilled;
