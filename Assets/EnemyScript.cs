@@ -110,6 +110,7 @@ public class EnemyScript : MonoBehaviour
         if (player != null)
         {
             player.GainXP(xpToGive);
+            player.currentRunEnemiesKilled += 1;
         }
 
         if (xpPopupPrefab != null)
@@ -122,6 +123,7 @@ public class EnemyScript : MonoBehaviour
                 popupScript.SetText("+" + xpToGive.ToString("F2") + " XP");
             }
         }
+            
 
 
         Destroy(gameObject);

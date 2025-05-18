@@ -20,6 +20,9 @@ public class Playerscript : MonoBehaviour
     public float armor = 1f;
     public float currentXP = 0f;
     public float playerLevel = 0;
+    public int currentRunEnemiesKilled = 0;
+    public float currentRunXp = 0f;
+
 
     // ---  Player interaction  ---
     Vector2 moveDirection = Vector2.zero;
@@ -119,8 +122,33 @@ public class Playerscript : MonoBehaviour
     // ******************************************************************* 
     public void Die() 
     {
-        Destroy(gameObject);
+        // GAME MODE CHANGE
+        //float xpLoss = GameModeScript.Instance.GetXpLossOnDeath();
+        //{
+        //    currentXP -= currentXP * xpLoss;
+        //    if (currentXP < 0) currentXP = 0;
+        //}
+        OnPlayerDeath();
+
+        //Destroy(gameObject);
     }
+    void OnPlayerDeath()
+    {
+        ProgressionManager.Instance.data.totalEnemiesKilled += currentRunEnemiesKilled;
+        ProgressionManager.Instance.data.totalXpCollected += currentRunXp;
+        //ProgressionManager.Instance.data.totalRunsCompleted += 1;
+
+        // np. odblokowywanie czegoœ
+        if (ProgressionManager.Instance.data.totalEnemiesKilled >= 5)
+        {
+            ProgressionManager.Instance.data.unlockedItems.Add("SuperSword");
+        }
+
+        ProgressionManager.Instance.SaveProgress();
+        currentRunEnemiesKilled = 0;
+        currentRunXp = 0f;
+    }
+
 
     //private void AttackDirection(InputAction.CallbackContext context)
     //{
@@ -134,6 +162,8 @@ public class Playerscript : MonoBehaviour
     {
         currentXP += xpGained;
         Debug.Log($"+{xpGained} XP gained! Current XP: {currentXP}");
+
+        currentRunXp += currentXP;
 
         float xpForNextLevel = 100f + playerLevel * 50f;
 
