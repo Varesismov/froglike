@@ -50,7 +50,7 @@ Planned next steps:
 - [ ] First animation
 
 ## 🎮 Game Preview
-![First Preview](img/progress2.png)
+![First Preview](img/progress3.png)
 
 ---
 
