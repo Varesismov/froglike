@@ -1611,9 +1611,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2003168854}
     - target: {fileID: 2651592495948467272, guid: 12b48073162e9f648a2c1511b470b922, type: 3}
+      propertyPath: xpcarried
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651592495948467272, guid: 12b48073162e9f648a2c1511b470b922, type: 3}
       propertyPath: xpPopupPrefab
       value: 
-      objectReference: {fileID: 5862639168080738705, guid: 3ec529d1cdb5a0e439dcafc6c6a716ba, type: 3}
+      objectReference: {fileID: 1508430755685372890, guid: 3ec529d1cdb5a0e439dcafc6c6a716ba, type: 3}
     - target: {fileID: 3334078933203779468, guid: 12b48073162e9f648a2c1511b470b922, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
