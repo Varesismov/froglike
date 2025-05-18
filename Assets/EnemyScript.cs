@@ -4,17 +4,19 @@ using TMPro;
 public class EnemyScript : MonoBehaviour
 {
     public float current_health = 100f;
-    public float damage = 0f;
+    public float damage = 10f;
     public float armor = 2f;
     public float xpcarriedMin = 50f;
     public float xpcarriedMax = 100f;
     public string mobName = "Orc Warrior";
+    public float contactAttackCooldown = 1.0f;
 
     public TextMeshProUGUI nameText;
     public GameObject xpPopupPrefab;
 
     private Transform playerTransform;
     private EnemyMovement2D movement;
+    private float lastContactAttackTime = -999f;
 
 
     public void Start()
@@ -23,6 +25,7 @@ public class EnemyScript : MonoBehaviour
         {
             nameText.text = mobName;
         }
+        // Fiding target's position [transform] to chase. In this case a "Player"
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -58,6 +61,19 @@ public class EnemyScript : MonoBehaviour
         {
             Die();
             Debug.Log("Enemy died.");
+        }
+    }
+    // --- Dealing Contact Damage ---
+    public void DealDamageToPlayer(Playerscript player)
+    {
+        if (Time.time - lastContactAttackTime < contactAttackCooldown)
+            return;
+
+        lastContactAttackTime = Time.time;
+
+        if (player != null)
+        {
+            player.TakeDamage(damage);
         }
     }
 

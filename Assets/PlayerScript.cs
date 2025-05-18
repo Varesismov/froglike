@@ -97,6 +97,18 @@ public class Playerscript : MonoBehaviour
         myRb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
+    public void TakeDamage(float dmg)
+    {
+        currentHealth = currentHealth - dmg / armor;
+        Debug.Log("You've taken" + dmg + " Damage. Your remaining HP: " + currentHealth);
+
+        //if (currentHealth <= 0)
+        //{
+        //    Die();
+        //    Debug.Log("Enemy died.");
+        //}
+    }
+
     //private void Attack(InputAction.CallbackContext context)
     //{
     //    Debug.Log("You've succesfully performed an attack");
