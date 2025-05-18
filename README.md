@@ -11,8 +11,8 @@
 It features:
 - 🐸 A frog protagonist with unique movement and combat mechanics
 - 🌀 Procedurally generated levels
-- 🧪 Randomly generated items and upgrades
-- 🎨 Pixel art style
+- 🧪 A wide variety of obtainable items 
+- 🎨 Pixel art style, bunch of character customization items
 
 Currently in **early development**
 
@@ -29,15 +29,28 @@ Currently in **early development**
 
 ## 📅 Development Status
 
-This project just started.
+Already dont steps:
+💻:
+- [X] Implemented basic enemy AI
+- [X] Player movement and controls
+- [X] Basic XP logic
+- [X] Eneny contact damage logic
+🎨:
+- [X] Created pixelart tiles for the level
+🎥 :
+- [X] Caputring progress through videos.
+
 Planned next steps:
-- [ ] 💻 Enemies Health Bars
-- [ ] 💻 XP gain on screen
-- [ ] 💻 Damage marker on enemy
-- [ ] 🎨 Projectiles for player
+💻:
+- [ ] Enemies Health Bars
+- [ ] Game mode difficulty (Normal/Hardcore) [hardcore including losing xp on a run]
+- [ ] Damage marker on enemy
+🎨:
+- [ ] Projectiles for player
+- [ ] First animation
 
 ## 🎮 Game Preview
-![First Preview](img/progress2.png)
+![First Preview](img/progress3.png)
 
 ---
 
