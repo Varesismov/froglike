@@ -12,7 +12,7 @@ It features:
 - 🐸 A frog protagonist with unique movement and combat mechanics
 - 🌀 Procedurally generated levels
 - 🧪 A wide variety of obtainable items 
-- 🎨 Pixel art style, lot of character customization
+- 🎨 Pixel art style, bunch of character customization items
 
 Currently in **early development**
 
