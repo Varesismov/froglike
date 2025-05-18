@@ -144,7 +144,7 @@ public class Playerscript : MonoBehaviour
         // np. odblokowywanie czegoœ
         if (ProgressionManager.Instance.data.totalEnemiesKilled >= 5)
         {
-            ProgressionManager.Instance.data.unlockedItems.Add("SuperSword");
+            ProgressionManager.Instance.data.unlockedItems.Add(1);
         }
 
         ProgressionManager.Instance.SaveProgress();
