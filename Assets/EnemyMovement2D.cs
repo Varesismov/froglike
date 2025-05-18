@@ -8,7 +8,7 @@ public class EnemyMovement2D : MonoBehaviour
     private Vector3 targetPosition;
     private bool hasTarget = false;
 
-    // --- References ---
+    // --- References to objects ---
     private Rigidbody2D rb;
     private EnemyScript enemyScript;
 
@@ -42,22 +42,16 @@ public class EnemyMovement2D : MonoBehaviour
     {
         if (trigger.gameObject.CompareTag("Player"))
         {
-            hasTarget = false; // Stopping movement
+            //hasTarget = false; // Stopping movement
 
             Playerscript player = trigger.gameObject.GetComponent<Playerscript>();
             if (player != null && enemyScript != null)
             {
-                enemyScript.DealDamageToPlayer(player);
+                enemyScript.UpdateContactDamage(player, Time.deltaTime);
+                //enemyScript.DealDamageToPlayer(player);
             }
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Enemy is no longer dealing damage to you");
-            // [TODO]: Anmiation end, target reset, etc.
-        }
-    }
+
 
 }

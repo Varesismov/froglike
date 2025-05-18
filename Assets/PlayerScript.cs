@@ -17,7 +17,7 @@ public class Playerscript : MonoBehaviour
     public float moveSpeed = 5f;
     public float currentHealth = 100f;
     public float maxHealth = 100f;
-    public float armor = 10f;
+    public float armor = 1f;
     public float currentXP = 0f;
     public float playerLevel = 0;
 
@@ -28,33 +28,30 @@ public class Playerscript : MonoBehaviour
     private InputAction attackDirection;
     Vector2 attackDir = Vector2.zero;
     private float lastFireTime = 0f;
-
-
-    // ---  XP Logic  ---
-    public void GainXP(float xpGained)
+    void Update()
     {
-        currentXP += xpGained;
-        Debug.Log($"+{xpGained} XP gained! Current XP: {currentXP}");
+        moveDirection = move.ReadValue<Vector2>();
 
-        float xpForNextLevel = 100f + playerLevel * 50f;
+        attackDir = attackDirection.ReadValue<Vector2>();
 
-        if (currentXP >= xpForNextLevel)
+        if (attackDir != Vector2.zero && Time.time - lastFireTime >= fireRate)
         {
-            currentXP -= xpForNextLevel;
-            playerLevel++;
-            Debug.Log($"Level up: {playerLevel}");
+            Shoot(attackDir);
+            lastFireTime = Time.time;
         }
-    }
-    private void Awake()
-    {
-        playerControls = new InputSystem_Actions();
-        if (myRb != null)
-        {
-            myRb.freezeRotation = true;
-        }
+        firePoint.localPosition = attackDir.normalized * 0.3f;
 
     }
+    private void FixedUpdate()
+    {
+        myRb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+    }
 
+    // *******************************************************************
+    // *                         Player Controls                         *
+    // ******************************************************************* 
+
+    // enabling every needed control
     private void OnEnable()
     {
         playerControls.Player.Enable();
@@ -76,52 +73,14 @@ public class Playerscript : MonoBehaviour
         attack.Disable();
         attackDirection.Disable();
     }
-    void Update()
-    {
-        moveDirection = move.ReadValue<Vector2>();
 
-        attackDir = attackDirection.ReadValue<Vector2>();
+    // *******************************************************************
+    // *                     Player Damage                               *
+    // ******************************************************************* 
 
-        if (attackDir != Vector2.zero && Time.time - lastFireTime >= fireRate)
-        {
-            Shoot(attackDir);
-            lastFireTime = Time.time;
-        }
-        firePoint.localPosition = attackDir.normalized * 0.3f;
-
-
-    }
-
-    private void FixedUpdate()
-    {
-        myRb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-    }
-
-    public void TakeDamage(float dmg)
-    {
-        currentHealth = currentHealth - dmg / armor;
-        Debug.Log("You've taken" + dmg + " Damage. Your remaining HP: " + currentHealth);
-
-        //if (currentHealth <= 0)
-        //{
-        //    Die();
-        //    Debug.Log("Enemy died.");
-        //}
-    }
-
-    //private void Attack(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("You've succesfully performed an attack");
-    //}
-
-    //private void AttackDirection(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("You've succefully fired");
-    //}
+    // --- Player directional shooting ability ---
     void Shoot(Vector2 direction)
     {
-        //Debug.Log("Shooting in a direction of: " + direction);
-
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
@@ -140,6 +99,65 @@ public class Playerscript : MonoBehaviour
         {
             projScript.damage = this.damage * 2f;
         }
+    }
+
+    // --- Player taking damage --- 
+    public void TakeDamage(float dmg)
+    {
+        currentHealth = currentHealth - dmg / armor;
+        Debug.Log("You've taken" + dmg + " Damage. Your remaining HP: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+            Debug.Log("Player has died.");
+        }
+    }
+
+    // *******************************************************************
+    // *                         Player Death                            *
+    // ******************************************************************* 
+    public void Die() 
+    {
+        Destroy(gameObject);
+    }
+
+    //private void AttackDirection(InputAction.CallbackContext context)
+    //{
+    //    Debug.Log("You've succefully fired");
+    //}
+
+    // *******************************************************************
+    // *                         XP Logic                                *
+    // ******************************************************************* 
+    public void GainXP(float xpGained)
+    {
+        currentXP += xpGained;
+        Debug.Log($"+{xpGained} XP gained! Current XP: {currentXP}");
+
+        float xpForNextLevel = 100f + playerLevel * 50f;
+
+        if (currentXP >= xpForNextLevel)
+        {
+            currentXP -= xpForNextLevel;
+            playerLevel++;
+            Debug.Log($"Level up: {playerLevel}");
+        }
+    }
+
+    // *******************************************************************
+    // *                        Physics fix                              *
+    // ******************************************************************* 
+
+    // Getting rid of unwanted spining of a player (idk)
+    private void Awake()
+    {
+        playerControls = new InputSystem_Actions();
+        if (myRb != null)
+        {
+            myRb.freezeRotation = true;
+        }
+
     }
 
 }

@@ -10,13 +10,20 @@ public class EnemyScript : MonoBehaviour
     public float xpcarriedMax = 100f;
     public string mobName = "Orc Warrior";
     public float contactAttackCooldown = 1.0f;
+    public float damageIncreaseInterval = 1f;
+    public float damageIncreaseAmount = 5f;
 
+    // --- References to objects ---
     public TextMeshProUGUI nameText;
     public GameObject xpPopupPrefab;
 
     private Transform playerTransform;
     private EnemyMovement2D movement;
+
+
     private float lastContactAttackTime = -999f;
+    private float timeInContact = 0f;
+    private float baseDamage;
 
 
     public void Start()
@@ -41,6 +48,7 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.LogError("EnemyMovement2D component missing!");
         }
+        baseDamage = damage;
     }
     void Update()
     {
@@ -49,6 +57,36 @@ public class EnemyScript : MonoBehaviour
             movement.SetTargetPosition(playerTransform.position);
         }
 
+    }
+    // *******************************************************************
+    // *                         Enemy Damage                            *
+    // ******************************************************************* 
+
+    // --- Contanct Damage update ---
+    //Changing damage value over time spent being in contact with a player
+    public void UpdateContactDamage(Playerscript player, float deltaTime)
+    {
+        timeInContact += deltaTime;
+
+        // Damage increasing with every [damageIncreaseInterval] seconds.
+        int multiplier = Mathf.FloorToInt(timeInContact / damageIncreaseInterval);
+        damage = baseDamage + (multiplier * damageIncreaseAmount);
+
+        DealDamageToPlayer(player);
+    }
+
+    // --- Dealing Contact Damage logic ---
+    public void DealDamageToPlayer(Playerscript player)
+    {
+        if (Time.time - lastContactAttackTime < contactAttackCooldown)
+            return;
+
+        lastContactAttackTime = Time.time;
+
+        if (player != null)
+        {
+            player.TakeDamage(damage);
+        }
     }
 
     // --- Enemy Taking Damage ---
@@ -63,20 +101,6 @@ public class EnemyScript : MonoBehaviour
             Debug.Log("Enemy died.");
         }
     }
-    // --- Dealing Contact Damage ---
-    public void DealDamageToPlayer(Playerscript player)
-    {
-        if (Time.time - lastContactAttackTime < contactAttackCooldown)
-            return;
-
-        lastContactAttackTime = Time.time;
-
-        if (player != null)
-        {
-            player.TakeDamage(damage);
-        }
-    }
-
 
     // --- Enemy Death ---
     private void Die()
@@ -101,5 +125,20 @@ public class EnemyScript : MonoBehaviour
 
 
         Destroy(gameObject);
+    }
+
+    // *******************************************************************
+    // *                         OnTrigger                               *
+    // ******************************************************************* 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Enemy is no longer dealing damage to you");
+            // [TODO]: Anmiation end, target reset, etc.
+
+            timeInContact = 0f;
+            damage = baseDamage;
+        }
     }
 }
