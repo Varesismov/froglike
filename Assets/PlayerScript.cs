@@ -140,11 +140,11 @@ public class Playerscript : MonoBehaviour
         ProgressionManager.Instance.data.totalEnemiesKilled += currentRunEnemiesKilled;
         ProgressionManager.Instance.data.totalXpCollected += currentRunXp;
 
-        // example of unlocking something after killing 5 enemies in total
-        //if (ProgressionManager.Instance.data.totalEnemiesKilled >= 5)
-        //{
-        //    ProgressionManager.Instance.data.unlockedItemsIds.Add(1);
-        //}
+        if (ProgressionManager.Instance.data.totalEnemiesKilled >= 25)
+        {
+            ProgressionManager.Instance.data.UnlockItem(1);
+            Debug.Log("Item ID 1 was unlocked!");
+        }
 
         ProgressionManager.Instance.SaveProgress();
         currentRunEnemiesKilled = 0;

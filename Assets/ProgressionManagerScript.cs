@@ -4,6 +4,7 @@ using System.IO;
 public class ProgressionManager : MonoBehaviour
 {
     public static ProgressionManager Instance;
+    public InventoryManager inventoryManager;
 
     public PlayerProgressData data;
     private string savePath;
@@ -48,6 +49,9 @@ public class ProgressionManager : MonoBehaviour
         {
             data = new PlayerProgressData();
         }
+
+        if (inventoryManager != null)
+            inventoryManager.LoadUnlockedItems();
     }
 
     public void ResetProgress()
