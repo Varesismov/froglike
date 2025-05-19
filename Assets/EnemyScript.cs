@@ -3,19 +3,20 @@ using TMPro;
 
 public class EnemyScript : MonoBehaviour
 {
-    public float current_health = 100f;
-    public float damage = 10f;
-    public float armor = 2f;
-    public float xpcarriedMin = 50f;
-    public float xpcarriedMax = 100f;
-    public string mobName = "Orc Warrior";
-    public float contactAttackCooldown = 1.0f;
-    public float damageIncreaseInterval = 1f;
-    public float damageIncreaseAmount = 5f;
+    public EnemyData data; // <-- new data source
+
+    
+    //public float xpcarriedMin = 50f;
+    //public float xpcarriedMax = 100f;
+    //public string mobName = "Orc Warrior";
+    //public float contactAttackCooldown = 1.0f;
+    //public float damageIncreaseInterval = 1f;
+    //public float damageIncreaseAmount = 5f;
 
     // --- References to objects ---
     public TextMeshProUGUI nameText;
     public GameObject xpPopupPrefab;
+    public SpriteRenderer spriteRenderer;
 
     private Transform playerTransform;
     private EnemyMovement2D movement;
@@ -24,40 +25,45 @@ public class EnemyScript : MonoBehaviour
     private float lastContactAttackTime = -999f;
     private float timeInContact = 0f;
     private float baseDamage;
+    private float current_health;
+    private float damage;
+    private float armor;
 
 
-    public void Start()
+    private void Start()
     {
+        if (data == null)
+        {
+            Debug.LogError("EnemyData is missing on " + gameObject.name);
+            return;
+        }
+
+        current_health = data.maxHealth;
+        baseDamage = data.baseDamage;
+        damage = baseDamage;
+
         if (nameText != null)
         {
-            nameText.text = mobName;
+            nameText.text = data.mobName;
         }
-        // Fiding target's position [transform] to chase. In this case a "Player"
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-        {
-            playerTransform = playerObj.transform;
-        }
-        else
-        {
-            Debug.LogWarning("Player object not found! Make sure it has tag 'Player'.");
-        }
+        if (playerObj != null) playerTransform = playerObj.transform;
 
         movement = GetComponent<EnemyMovement2D>();
-        if (movement == null)
+
+        if (spriteRenderer != null && data.icon != null)
         {
-            Debug.LogError("EnemyMovement2D component missing!");
+            spriteRenderer.sprite = data.icon;
         }
-        baseDamage = damage;
     }
-    void Update()
+    private void Update()
     {
         if (playerTransform != null && movement != null)
-        {
             movement.SetTargetPosition(playerTransform.position);
-        }
-
     }
+
+
     // *******************************************************************
     // *                         Enemy Damage                            *
     // ******************************************************************* 
@@ -68,9 +74,8 @@ public class EnemyScript : MonoBehaviour
     {
         timeInContact += deltaTime;
 
-        // Damage increasing with every [damageIncreaseInterval] seconds.
-        int multiplier = Mathf.FloorToInt(timeInContact / damageIncreaseInterval);
-        damage = baseDamage + (multiplier * damageIncreaseAmount);
+        int multiplier = Mathf.FloorToInt(timeInContact / data.damageIncreaseInterval);
+        damage = baseDamage + (multiplier * data.damageIncreaseAmount);
 
         DealDamageToPlayer(player);
     }
@@ -78,35 +83,33 @@ public class EnemyScript : MonoBehaviour
     // --- Dealing Contact Damage logic ---
     public void DealDamageToPlayer(Playerscript player)
     {
-        if (Time.time - lastContactAttackTime < contactAttackCooldown)
+        if (Time.time - lastContactAttackTime < data.contactAttackCooldown)
             return;
 
         lastContactAttackTime = Time.time;
-
-        if (player != null)
-        {
-            player.TakeDamage(damage);
-        }
+        if (player != null) player.TakeDamage(damage);
     }
 
     // --- Enemy Taking Damage ---
     public void TakeDamage(float dmg)
     {
-        current_health = current_health - dmg / armor;
+        current_health -= dmg / data.armor;
         Debug.Log("Enemy took damage: " + dmg + ", remaining HP: " + current_health);
 
-        if (current_health <= 0)
+        if (current_health <= 0) 
         {
             Die();
             Debug.Log("Enemy died.");
         }
+        
     }
 
     // --- Enemy Death ---
     private void Die()
     {
         Playerscript player = FindFirstObjectByType<Playerscript>();
-        float xpToGive = Random.Range(xpcarriedMin, xpcarriedMax);
+        float xpToGive = Random.Range(data.xpcarriedMin, data.xpcarriedMax);
+
         if (player != null)
         {
             player.GainXP(xpToGive);
@@ -116,17 +119,11 @@ public class EnemyScript : MonoBehaviour
         if (xpPopupPrefab != null)
         {
             GameObject popup = Instantiate(xpPopupPrefab, transform.position, Quaternion.identity);
-
-            XPTextPopup popupScript = popup.GetComponentInChildren<XPTextPopup>();
-            if (popupScript != null)
-            {
-                popupScript.SetText("+" + xpToGive.ToString("F2") + " XP");
-            }
+            popup.GetComponentInChildren<XPTextPopup>()?.SetText("+" + xpToGive.ToString("F2") + " XP");
         }
-            
-
 
         Destroy(gameObject);
+
     }
 
     // *******************************************************************

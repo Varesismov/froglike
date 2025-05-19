@@ -13,7 +13,7 @@ public class ProgressionManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this); //Surviving scene load
 
             savePath = Application.persistentDataPath + "/progress.json";
 

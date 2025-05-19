@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b386d2d21f7d34c92e1f71265197e1, type: 3}
+  m_Name: NewEnemyData
+  m_EditorClassIdentifier: 
+  mobName: Orc Warrior
+  maxHealth: 100
+  baseDamage: 10
+  armor: 2
+  xpcarriedMin: 50
+  xpcarriedMax: 100
+  contactAttackCooldown: 1
+  damageIncreaseInterval: 1
+  damageIncreaseAmount: 5
+  icon: {fileID: -5674440567363201290, guid: 7738240e05f50c34abaf038df2f3ff2e, type: 3}
