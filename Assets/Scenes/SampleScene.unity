@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abdd53cd77720c4f8fac8ad21cfb8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 1452213370}
   data:
     totalEnemiesKilled: 0
     totalXpCollected: 0
@@ -1456,7 +1457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96164f014639e4141b19dc23b94aff13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDatabase: {fileID: 11400000, guid: 0a4a38fb0270f6d48b50b5fccda44494, type: 2}
+  itemDatabase: {fileID: 11400000, guid: cc813f56b13a2f04b92fe034cb77ed3a, type: 2}
+  player: {fileID: 0}
 --- !u!4 &1452213371
 Transform:
   m_ObjectHideFlags: 0
