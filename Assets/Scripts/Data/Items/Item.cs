@@ -5,8 +5,8 @@ public class Item
 {
     public int id;
     public float damage;
+    public string rarity;
     public string name;
     public string description;
     public Sprite icon;
-    // inne dane np. statystyki, rarity, itd.
 }

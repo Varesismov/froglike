@@ -5,22 +5,13 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public ItemDatabase itemDatabase;
+    public Playerscript player;
 
     private List<Item> unlockedItems = new List<Item>();
-    //void OnEnable()
-    //{
-    //    StartCoroutine(DelayedLoad());
-    //}
-
-    //IEnumerator DelayedLoad()
-    //{
-    //    yield return new WaitUntil(() => ProgressionManager.Instance != null && ProgressionManager.Instance.data != null);
-    //    LoadUnlockedItems();
-    //}
-
     void Start()
     {
         LoadUnlockedItems();
+        ApplyItemEffectsToPlayer();
     }
 
     public void LoadUnlockedItems()
@@ -33,11 +24,25 @@ public class InventoryManager : MonoBehaviour
             if (item != null)
             {
                 unlockedItems.Add(item);
-                Debug.Log("Odblokowany przedmiot: " + item.name);
+                Debug.Log("Unlocked item: " + item.name);
             }
         }
 
-        // np. uaktualnij UI
+
         Debug.Log("Za³adowano " + unlockedItems.Count + " odblokowanych przedmiotów.");
+    }
+    void ApplyItemEffectsToPlayer()
+    {
+        if (player == null)
+        {
+            Debug.LogWarning("Missing player reference in InventoryManager!");
+            return;
+        }
+
+        foreach (Item item in unlockedItems)
+        {
+            player.damage += item.damage;
+            Debug.Log("Zastosowano efekt przedmiotu: " + item.name);
+        }
     }
 }
