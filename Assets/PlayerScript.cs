@@ -150,6 +150,8 @@ public class Playerscript : MonoBehaviour
         currentRunEnemiesKilled = 0;
         currentRunXp = 0f;
 
+
+
         Destroy(gameObject);
     }
     // --- Item Unlocking ---
@@ -193,6 +195,9 @@ public class Playerscript : MonoBehaviour
         {
             myRb.freezeRotation = true;
         }
+
+        //playerLevel = ProgressionManager.Instance.data.playerLevel;
+        //currentXP = ProgressionManager.Instance.data.storedXP;
 
     }
 

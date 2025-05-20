@@ -7,6 +7,8 @@ public class PlayerProgressData
     public float totalXpCollected = 0f;
     public int totalRunsCompleted = 0;
     public float goldCollected = 0f;
+    public int playerLevel = 0;
+
     public List<int> unlockedItemsIds = new List<int>();
     public void UnlockItem(int id)
     {
