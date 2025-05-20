@@ -35,22 +35,22 @@ Already dont steps:
 - [X] Player movement and controls
 - [X] Basic XP logic
 - [X] Eneny contact damage logic
+- [X] Working inventory connected to Player progress and Main Item Database
+- [X] Items influence player statistics
+- [X] Basic achivements with unlocks
 🎨:
 - [X] Created pixelart tiles for the level
-🎥 :
-- [X] Caputring progress through videos.
+- [X] Created over 20 new item sprites
 
 Planned next steps:
 💻:
 - [ ] Enemies Health Bars
-- [ ] Game mode difficulty (Normal/Hardcore) [hardcore including losing xp on a run]
-- [ ] Damage marker on enemy
+- [ ] Player Equipment UI (different than Inventory)
 🎨:
-- [ ] Projectiles for player
 - [ ] First animation
 
 ## 🎮 Game Preview
-![First Preview](img/progress3.png)
+![First Preview](img/progress5.png)
 
 ---
 
