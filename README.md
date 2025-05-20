@@ -38,6 +38,7 @@ Already dont steps:
 - [X] Working inventory connected to Player progress and Main Item Database
 - [X] Items influence player statistics
 - [X] Basic achivements with unlocks
+
 🎨:
 - [X] Created pixelart tiles for the level
 - [X] Created over 20 new item sprites
