@@ -15,11 +15,13 @@ MonoBehaviour:
   items:
   - id: 1
     damage: 10
+    rarity: 
     name: Sword
     description: '"Mighty sword that wields a great power within its blade"'
-    icon: {fileID: -3753825769889500098, guid: 7ac146a9a9f4ad143bb9bc6e539056a7, type: 3}
+    icon: {fileID: -6192426536848704374, guid: 80e1a178b453a504c9122b6f848bf03a, type: 3}
   - id: 2
     damage: 20
+    rarity: 
     name: Rod
     description: '"A powerful wizard used to wield it long ago..."'
-    icon: {fileID: 406901352155142273, guid: 4193f1880db781b4c8c5dd0498550a87, type: 3}
+    icon: {fileID: 8629145779798143320, guid: 80e1a178b453a504c9122b6f848bf03a, type: 3}
