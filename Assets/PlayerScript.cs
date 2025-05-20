@@ -149,6 +149,8 @@ public class Playerscript : MonoBehaviour
         ProgressionManager.Instance.SaveProgress();
         currentRunEnemiesKilled = 0;
         currentRunXp = 0f;
+
+        Destroy(gameObject);
     }
     // --- Item Unlocking ---
 
