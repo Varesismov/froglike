@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
             inventoryUI.SetActive(false); // Hide inventory at start
 
         LoadUnlockedItems();
-        ApplyItemEffectsToPlayer();
+        //ApplyItemEffectsToPlayer();
         DisplayInventoryUI();
     }
 
@@ -52,20 +52,20 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log("Za³adowano " + unlockedItems.Count + " odblokowanych przedmiotów.");
     }
-    void ApplyItemEffectsToPlayer()
-    {
-        if (player == null)
-        {
-            Debug.LogWarning("Missing player reference in InventoryManager!");
-            return;
-        }
+    //void ApplyItemEffectsToPlayer()
+    //{
+    //    if (player == null)
+    //    {
+    //        Debug.LogWarning("Missing player reference in InventoryManager!");
+    //        return;
+    //    }
 
-        foreach (Item item in unlockedItems)
-        {
-            player.damage += item.damage;
-            Debug.Log("Zastosowano efekt przedmiotu: " + item.name);
-        }
-    }
+    //    foreach (Item item in unlockedItems)
+    //    {
+    //        player.damage += item.damage;
+    //        //Debug.Log("Zastosowano efekt przedmiotu: " + item.name);
+    //    }
+    //}
     public void DisplayInventoryUI()
     {
         // 1. Wyczyœæ istniej¹ce sloty
