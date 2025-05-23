@@ -33,21 +33,21 @@ MonoBehaviour:
     name: Scythe
     description: 
     icon: {fileID: -13505434916677755, guid: 80e1a178b453a504c9122b6f848bf03a, type: 3}
-    itemType: 2
+    itemType: 4
   - id: 4
     damage: 15
     rarity: 
     name: Lightning Crossbow
     description: 
     icon: {fileID: -1046544796, guid: 80e1a178b453a504c9122b6f848bf03a, type: 3}
-    itemType: 6
+    itemType: 4
   - id: 5
     damage: 30
     rarity: 
     name: Aspect of Fire Book
     description: 
     icon: {fileID: 634608613, guid: 80e1a178b453a504c9122b6f848bf03a, type: 3}
-    itemType: 4
+    itemType: 0
   - id: 5
     damage: 30
     rarity: 

@@ -104,6 +104,12 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    public void AddItemToInventory(Item item)
+    {
+        unlockedItems.Add(item);
+        DisplayInventoryUI();
+    }
+
 
     public void ToggleInventory()
     {
