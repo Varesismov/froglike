@@ -488,6 +488,7 @@ MonoBehaviour:
     totalXpCollected: 0
     totalRunsCompleted: 0
     goldCollected: 0
+    playerLevel: 0
     unlockedItemsIds: 
 --- !u!4 &1175826000
 Transform:
@@ -3494,6 +3495,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 648590285}
     m_Modifications:
+    - target: {fileID: 1006150293489725948, guid: df9c12f9f7fbd704c81c0bccd0eeae9a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2126130174, guid: a0fc408da0e03d04ebea15adaf02fb69, type: 3}
     - target: {fileID: 1806107243977873032, guid: df9c12f9f7fbd704c81c0bccd0eeae9a, type: 3}
       propertyPath: m_Name
       value: InventorySlotIconPrefab
@@ -3576,10 +3581,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5728159590369387963, guid: df9c12f9f7fbd704c81c0bccd0eeae9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653210012107444698, guid: df9c12f9f7fbd704c81c0bccd0eeae9a, type: 3}
-      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
@@ -8,6 +9,7 @@ public class InventoryManager : MonoBehaviour
 {
     public ItemDatabase itemDatabase;
     public Playerscript player;
+    public GameObject inventoryUI; // np. Canvas or UI eq panel
 
     [Header("Inventory UI")]
     public Transform inventoryPanel; // np. InventoryPanel (w Canvas)
@@ -16,9 +18,21 @@ public class InventoryManager : MonoBehaviour
     private List<Item> unlockedItems = new List<Item>();
     void Start()
     {
+        if (inventoryUI != null)
+            inventoryUI.SetActive(false); // Hide inventory at start
+
         LoadUnlockedItems();
         ApplyItemEffectsToPlayer();
         DisplayInventoryUI();
+    }
+
+    private void Update()   
+    {
+        // Inventory toggle
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            ToggleInventory();
+        }
     }
 
     public void LoadUnlockedItems()
@@ -80,4 +94,13 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    public void ToggleInventory()
+    {
+        if (inventoryUI != null)
+        {
+            bool isActive = inventoryUI.activeSelf;
+            inventoryUI.SetActive(!isActive);
+        }
+    }
+
 }

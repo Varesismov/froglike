@@ -19,7 +19,7 @@ public class Playerscript : MonoBehaviour
     public float maxHealth = 100f;
     public float armor = 1f;
     public float currentXP = 0f;
-    public float playerLevel = 0;
+    public int playerLevel = 0;
     public int currentRunEnemiesKilled = 0;
     public float currentRunXp = 0f;
 
@@ -149,6 +149,8 @@ public class Playerscript : MonoBehaviour
         ProgressionManager.Instance.SaveProgress();
         currentRunEnemiesKilled = 0;
         currentRunXp = 0f;
+        ProgressionManager.Instance.data.playerLevel = playerLevel;
+
 
 
 
@@ -196,7 +198,7 @@ public class Playerscript : MonoBehaviour
             myRb.freezeRotation = true;
         }
 
-        //playerLevel = ProgressionManager.Instance.data.playerLevel;
+        playerLevel = ProgressionManager.Instance.data.playerLevel;
         //currentXP = ProgressionManager.Instance.data.storedXP;
 
     }
