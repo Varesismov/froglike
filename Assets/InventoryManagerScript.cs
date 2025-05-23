@@ -68,32 +68,43 @@ public class InventoryManager : MonoBehaviour
     }
     public void DisplayInventoryUI()
     {
+        // 1. Wyczyœæ istniej¹ce sloty
         foreach (Transform child in inventoryPanel)
         {
-            Destroy(child.gameObject); // Clearing old icons
+            Destroy(child.gameObject);
         }
 
+        // 2. Twórz nowe sloty z przypisanym itemem
         foreach (Item item in unlockedItems)
         {
             GameObject slot = Instantiate(inventorySlotPrefab, inventoryPanel);
-
             Transform iconTransform = slot.transform.Find("Icon");
-
-            Image image = slot.GetComponent<Image>();
-
 
             if (iconTransform != null)
             {
                 Image iconImage = iconTransform.GetComponent<Image>();
+                ItemDragHandler dragHandler = iconTransform.GetComponent<ItemDragHandler>();
 
+                // Przypisz sprite
                 if (iconImage != null && item.icon != null)
                 {
                     iconImage.sprite = item.icon;
                     iconImage.color = Color.white;
                 }
+
+                // Przypisz logikê przeci¹gania
+                if (dragHandler != null)
+                {
+                    dragHandler.item = item;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Brakuje obiektu Icon w slocie prefab!");
             }
         }
     }
+
     public void ToggleInventory()
     {
         if (inventoryUI != null)
